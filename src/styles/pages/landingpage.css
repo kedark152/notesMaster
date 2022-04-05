@@ -13,11 +13,14 @@
     align-items: center;
 }
 
-.text-content{
+.text-section{
     width: 43rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-.text-content p{
+.text-section p{
     font-size: 1.2rem;
 }
 
@@ -28,7 +31,7 @@
     max-height: fit-content;
 }
 
-.page-links{
-    align-items: flex-start;
-}
+.page-links-section{
+    font-size: 1.2rem;
 
+}
