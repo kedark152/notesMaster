@@ -1,0 +1,32 @@
+.container-landing-pg{
+    flex-wrap: wrap;
+    font-family: var(--lato-font);
+   width: 100vw;
+   min-height: 100vh;
+   max-height: fit-content;
+   background-image:var(--green-grad);
+}
+.notes-icon{
+    width: 55px;
+    height: 50px;
+     margin-left: 10px;
+     align-items: center;
+}
+
+.text-content{
+    width: 700px;
+  }
+  .text-content p{
+      font-size: 1.2rem;
+  }
+.hero-image{
+   flex-grow: 1;
+  width: 200px;
+  min-height: auto;
+  max-height: fit-content;
+}
+
+.page-links{
+    align-items: flex-start;
+}
+
