@@ -1,29 +1,31 @@
 .container-landing-pg{
     flex-wrap: wrap;
     font-family: var(--lato-font);
-   width: 100vw;
-   min-height: 100vh;
-   max-height: fit-content;
-   background-image:var(--green-grad);
+    width: 100vw;
+    min-height: 100vh;
+    max-height: fit-content;
+    background-image:var(--green-grad);
 }
 .notes-icon{
     width: 3.4rem;
     height: 3.12rem;
-     margin-left: 10px;
-     align-items: center;
+    margin-left: 10px;
+    align-items: center;
 }
 
 .text-content{
     width: 43rem;
-  }
-  .text-content p{
-      font-size: 1.2rem;
-  }
+}
+
+.text-content p{
+    font-size: 1.2rem;
+}
+
 .hero-image{
-   flex-grow: 1;
-  width: 24rem;
-  min-height: auto;
-  max-height: fit-content;
+    flex-grow: 1;
+    width: 24rem;
+    min-height: auto;
+    max-height: fit-content;
 }
 
 .page-links{
