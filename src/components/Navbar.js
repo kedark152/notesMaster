@@ -1,10 +1,10 @@
 import "../styles/layouts/navbar.css"
-
+import { Link } from "react-router-dom"
 
 export const Navbar = () =>{
     return (<>
             <nav id="nav-bar">
-            <div className="nav-brand fs-md"><a href="../index.html">NotesMaster</a></div>
+            <div className="nav-brand fs-md"><Link to="/">NotesMaster</Link></div>
             <div className="search-field">
                 <i className="material-icons" id="search-icon">search</i>
                 <i className="material-icons" id="filter-icon">filter_list</i>
