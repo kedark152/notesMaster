@@ -1,0 +1,70 @@
+.home-page-container{
+    font-family: var(--roboto-font);
+    min-height: 100vh;
+    max-height: max-content;
+    
+}
+
+.sidebar{
+    padding: 2rem;
+    width: 20vw;
+    background-image: var(--light-indigo-grad);
+   
+}
+
+.cell-block{
+    display: flex;
+    flex-direction: column;
+}
+
+#cell{
+    display: flex;
+   align-items: center;
+    margin: 3px;
+    padding: 0.5rem 2rem;  
+    font-size: 1.3rem; 
+    border-radius: 6px;
+}
+
+#cell:hover{
+    background-color:var(--indigo-light);
+    color: white;
+    cursor: pointer;
+   
+}
+
+.cell-block a{
+   text-decoration: none;  
+   color: var(--indigo-color);
+}
+.cell-block a:visited {
+   text-decoration: none; 
+  color: var(--indigo-color);
+}
+
+/* #cell:visited, #cell:hover, #cell:focus {
+    text-decoration: none;
+    color: black;
+} */
+
+#cell:focus {
+    background-color:var(--indigo-color);
+    color: white;
+    
+}
+.cell-block .material-icons{
+    margin-right: 20px;
+}
+
+.btn-new-note{
+    cursor: pointer;
+}
+
+/* Notes Listing Container */
+.notes-listing{
+    background-color: var(--grey-lightest);
+    width: 80vw;
+    padding: 1rem;
+    background-image: var(--light-indigo-grad);
+}
+
