@@ -38,7 +38,7 @@
 
 .edit-title{
     font-size: 1.6rem;
-    padding: 0.2rem;
+    padding: 3.2px;
 }
 
 .edit-title:focus{
@@ -63,7 +63,7 @@
 .error-text{
     color: red
 }
-textarea, textarea:focus
+.edit-title, .edit-body, .edit-title:focus, .edit-body:focus
 {
     font-family: var(--roboto-font);
     border: none;
