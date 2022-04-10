@@ -4,6 +4,7 @@ import "../styles/component/notescard.css";
 import "../styles/utils/variable.css";
 import { useNotes } from "../context/notes-context";
 import { getCurrentDate } from "../utilities/getCurrentDate";
+import { toast } from "react-toastify";
 
 export const NotesCard = ({ noteDetails }) => {
   const { _id, title, body, isPinned } = noteDetails;
@@ -55,9 +56,10 @@ export const NotesCard = ({ noteDetails }) => {
             <i className="material-icons">archive</i>
             <i
               className="material-icons"
-              onClick={() =>
-                dispatchNotes({ type: "DELETE-NOTE", payload: _id })
-              }
+              onClick={() => {
+                toast.success("Deleted Note");
+                dispatchNotes({ type: "DELETE-NOTE", payload: _id });
+              }}
             >
               delete
             </i>

@@ -4,6 +4,7 @@ import "../styles/component/editnotes.css";
 import "../styles/utils/variable.css";
 import { useNotes } from "../context/notes-context";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 
 export const EditNotesCard = () => {
   const editNotesForm = useRef(null);
@@ -17,7 +18,11 @@ export const EditNotesCard = () => {
       form["editTitle"].value.length > 0 &&
       form["editBody"].value.length > 0
     ) {
+      notesState.isEditing
+        ? toast.info("Edited Note")
+        : toast.success("Saved Note");
       setErrorText("");
+
       return {
         _id: uuid(),
         title: form["editTitle"].value,
