@@ -1,0 +1,37 @@
+
+
+.note-container{
+    
+    width: 600px;
+    min-height: 5rem;
+    max-height: max-content;
+    gap: 1rem;
+    background-color: var(--white);
+    font-family: var(--montserrat-font);
+    box-shadow: var(--box-shadow-1);
+    border-radius: var(--radius-md);
+    
+}
+
+.note-container i{
+    cursor: pointer;
+}
+.top-section i{
+  margin-left: auto;
+}
+
+.icon-buttons{
+    margin-left: auto;
+    gap: 1rem;
+  
+}
+
+.note-container .material-icons{
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.note-container .material-icons:hover{
+    color: var(--black);
+    background-color: var(--grey-lightest);
+}

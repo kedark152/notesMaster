@@ -4,7 +4,7 @@
     width: 100vw;
     min-height: 100vh;
     max-height: fit-content;
-    background-image:var(--green-grad);
+    background-image:var(--light-indigo-grad);
 }
 .notes-icon{
     width: 3.4rem;

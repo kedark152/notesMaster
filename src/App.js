@@ -1,9 +1,9 @@
 import "./App.css";
-import {LandingPage} from "./pages/LandingPage"
+import { PageRoutes } from "./routes/PageRoutes";
 function App() {
   return (
     <div className="App">
-    <LandingPage/>
+      <PageRoutes />
     </div>
   );
 }
