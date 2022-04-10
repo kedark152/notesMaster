@@ -56,7 +56,6 @@ export const notesInitialState = {
 };
 
 function saveNewNote(state, payload) {
-  console.log("payload", payload);
   if (payload.editBoxStatus === "hide-edit-box") {
     //To Edit the Existing Note
 

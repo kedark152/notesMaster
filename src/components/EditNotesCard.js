@@ -8,8 +8,6 @@ import { v4 as uuid } from "uuid";
 export const EditNotesCard = () => {
   const editNotesForm = useRef(null);
   const { notesState, dispatchNotes } = useNotes();
-  console.log(notesState.setEditBox);
-  console.log(notesState);
 
   const [errorText, setErrorText] = useState("");
 
