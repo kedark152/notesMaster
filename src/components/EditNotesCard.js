@@ -17,7 +17,7 @@ export const EditNotesCard = () =>{
     const form = editNotesForm.current;
       if(form["editTitle"].value.length>0 && form["editBody"].value.length>0){
           setErrorText("");
-          return {_id: uuid(),title:form["editTitle"].value,body:form["editBody"].value,editBoxStatus:"hide-edit-box",isPinned:notesState.isPinned};
+          return {_id: uuid(), title:form["editTitle"].value, body:form["editBody"].value, editBoxStatus:"hide-edit-box", isPinned:notesState.isPinned};
     }
       else{
           setErrorText("Title & Body Field should not be Blank");
