@@ -42,11 +42,6 @@
   color: var(--indigo-color);
 }
 
-/* #cell:visited, #cell:hover, #cell:focus {
-    text-decoration: none;
-    color: black;
-} */
-
 #cell:focus {
     background-color:var(--indigo-color);
     color: white;
