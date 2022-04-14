@@ -1,44 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-:root{
-    --green-grad:  linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
-    --light-indigo-grad: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%); 
+:root {
+    --green-grad: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+    --light-indigo-grad: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+    --red-grad:linear-gradient(270deg, #FFAA85 10%, #B3315F 100%);
+    --green-grad:linear-gradient(270deg, #70F570 10%, #49C628 100%);
+    --blue-grad:linear-gradient(270deg, #ABDCFF 10%, #0396FF 100%);
+    --orange-grad:linear-gradient(270deg, #FEB692 10%, #EA5455 100%);
+    --violet-grad:linear-gradient(270deg, #F5CBFF 10%, #C346C2 100%);
+
+    --mix-grad1:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    --grad1-bgColor:#4158D0;
+
+    --mix-grad2: linear-gradient(270deg, #81FFEF 10%, #F067B4 100%);
+    --grad2-bgColor:#ff3cac;
+
+    --mix-grad3:linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+
+
     --montserrat-font: 'Montserrat', sans-serif;
     --box-shadow-1: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --box-shadow-2: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    --small-box-shadow:rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     --indigo-color: rgb(93, 7, 155);
-    --indigo-light:rgb(168, 137, 190);
-    --napier-green : rgb(55,130,0);
-    --napier-green-light : rgb(187, 226, 159);
-    --dark-green:#003d2b;
+    --indigo-light: rgb(168, 137, 190);
+    --napier-green: rgb(55, 130, 0);
+    --napier-green-light: rgb(187, 226, 159);
+    --dark-green: #003d2b;
+    --red-color: rgb(247, 15, 15);
+    --red-light: rgb(241, 197, 197);
+    --yellow-color: rgb(241, 207, 9);
+    --yellow-light: rgb(163, 151, 70);
+
 }
-.primary-color{
+
+/* Reusable Classes */
+.primary-color {
     color: var(--indigo-color);
 }
-.primary-bg-color{
+
+.primary-bg-color {
     background-color: var(--indigo-color);
 }
-.primary-color-light{
+
+.primary-color-light {
     color: var(--indigo-color);
 }
-.secondary-color{
+
+.secondary-color {
     color: var(--napier-green);
 }
-.secondary-bg-color{
+
+.secondary-bg-color {
     background-color: var(--napier-green);
 }
-.secondary-color-light{
+
+.secondary-color-light {
     color: var(--napier-green-light);
 }
-.no-txt-decoration{
-  text-decoration: none;
+
+.no-txt-decoration {
+    text-decoration: none;
 }
-.dark-green{
+
+.dark-green {
     color: var(--dark-green);
 }
-.black{
-    color:var(--black);
+
+.black {
+    color: var(--black);
 }
-.grey{
-    color:var(--grey-dark);
+
+.grey {
+    color: var(--grey-dark);
 }
+
+
