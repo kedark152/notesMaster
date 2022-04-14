@@ -1,4 +1,4 @@
-.home-page-container{
+.labels-page-container{
     font-family: var(--roboto-font);
     min-height: 100vh;
     max-height: max-content;
@@ -6,7 +6,7 @@
 }
 
 /* Notes Listing Container */
-.notes-listing{
+.labels-notes-listing{
     background-color: var(--grey-lightest);
     width: 80vw;
     padding: 1rem;
