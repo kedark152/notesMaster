@@ -9,7 +9,9 @@ export const notesReducer = (state, { type, payload }) => {
         body: "",
         isEditing: false,
         isPinned: false,
+        priority: "none",
       };
+
     case "EDIT-NOTE":
       return {
         ...state,
@@ -19,40 +21,71 @@ export const notesReducer = (state, { type, payload }) => {
         body: payload.body,
         isEditing: payload.isEditing,
         isPinned: payload.isPinned,
+        priority: "none",
       };
+
     case "CANCEL-NOTE":
       return { ...state, setEditBox: "hide-edit-box", isEditing: false };
+
     case "EDIT-TITLE":
       return { ...state, title: payload };
+
     case "EDIT-BODY":
       return { ...state, body: payload };
+
     case "SAVE-NOTE":
       return {
         ...state,
         setEditBox: payload.editBoxStatus,
         notesList: saveNewNote(state, payload),
       };
+
     case "EDITOR-PIN":
       return { ...state, isPinned: payload };
+
     case "NOTE-PIN":
       return {
         ...state,
         isPinned: !payload.isPinned,
         noteList: togglePin(state, payload),
       };
+
     case "DELETE-NOTE":
       return { ...state, notesList: deleteNote(state, payload) };
+
+    case "ADD-NEW-LABEL":
+      return {
+        ...state,
+        allLabels: [...state.allLabels, payload.labelName], //add to main labels list
+      };
+    case "TOGGLE-TICK-LABEL":
+      return {
+        ...state,
+        notesList: toggleTickLabel(state, payload), // Toggle on tick from notes List, particular note.
+      };
+    case "CHANGE-PRIORITY":
+      return {
+        ...state,
+        priority: payload,
+      };
+    case "CHANGE-COLOR":
+      return {
+        ...state,
+        notesList: changeNoteColor(state, payload),
+      };
   }
 };
 
 export const notesInitialState = {
   notesList: [],
   setEditBox: "hide-edit-box",
-  _id: "",
+  _id: "", //helper variables
   title: "",
   body: "",
   isEditing: false,
   isPinned: false,
+  allLabels: [],
+  priority: "none",
 };
 
 function saveNewNote(state, payload) {
@@ -68,6 +101,7 @@ function saveNewNote(state, payload) {
             title: state.title,
             body: state.body,
             isPinned: state.isPinned,
+            priority: state.priority,
           };
         }
       }
@@ -82,6 +116,9 @@ function saveNewNote(state, payload) {
           title: payload.title,
           body: payload.body,
           isPinned: payload.isPinned,
+          labelsData: payload.labelsData,
+          priority: state.priority,
+          noteColor: "noteWhite",
         },
       ];
     }
@@ -106,4 +143,36 @@ function togglePin(state, payload) {
 
 function deleteNote(state, payload) {
   return state.notesList.filter((note) => note._id !== payload);
+}
+
+function toggleTickLabel(state, payload) {
+  let indexOfNote = state.notesList.findIndex(
+    (note) => note._id == payload.noteId
+  );
+
+  state.notesList[indexOfNote] = {
+    ...state.notesList[indexOfNote],
+    labelsData: payload.labelCheckedStatus
+      ? [
+          ...new Set(
+            state.notesList[indexOfNote].labelsData.concat(payload.labelName)
+          ),
+        ] //Add Label to List of particular Note on tick, ..new Set(char) is to remove duplicate values
+      : state.notesList[indexOfNote].labelsData.filter(
+          (label) => label !== payload.labelName
+        ), //remove Label from List of particular Note on Untick
+  };
+
+  return state.notesList;
+}
+
+function changeNoteColor(state, payload) {
+  let indexOfNote = state.notesList.findIndex(
+    (note) => note._id == payload.noteId
+  );
+  state.notesList[indexOfNote] = {
+    ...state.notesList[indexOfNote],
+    noteColor: payload.colorName,
+  };
+  return state.notesList;
 }
