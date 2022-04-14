@@ -29,6 +29,8 @@ export const EditNotesCard = () => {
         body: form["editBody"].value,
         editBoxStatus: "hide-edit-box",
         isPinned: notesState.isPinned,
+        labelsData: [],
+        noteColor: "noteWhite",
       };
     } else {
       setErrorText("Title & Body Field should not be Blank");
@@ -82,6 +84,22 @@ export const EditNotesCard = () => {
                 dispatchNotes({ type: "EDIT-BODY", payload: e.target.value })
               }
             />
+            <label htmlFor="priority">Priority: </label>
+            <select
+              id="priority"
+              name="note-priority"
+              onChange={(e) =>
+                dispatchNotes({
+                  type: "CHANGE-PRIORITY",
+                  payload: e.target.value,
+                })
+              }
+            >
+              <option value="none">None</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
           </div>
           <div className="bottom-section align-center">
             <div className="action-buttons align-center">
