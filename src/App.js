@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="App">
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={1500} />
       <PageRoutes />
     </div>
   );
