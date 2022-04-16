@@ -8,8 +8,13 @@ import { Sidebar } from "../components/Sidebar";
 
 export const Home = () => {
   const { notesState } = useNotes();
-  const pinnedNotesList = notesState.notesList.filter((note) => note.isPinned);
-  const othersNotesList = notesState.notesList.filter((note) => !note.isPinned);
+
+  const pinnedNotesList = notesState.notesList.filter(
+    (note) => note.isPinned && !note.isArchived && !note.isTrashed
+  );
+  const othersNotesList = notesState.notesList.filter(
+    (note) => !note.isPinned && !note.isArchived && !note.isTrashed
+  );
   return (
     <>
       <Navbar />
