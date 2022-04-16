@@ -10,36 +10,38 @@
     flex-direction: column;
 }
 
-#cell{
+.cell{
     display: flex;
    align-items: center;
     margin: 3px;
     padding: 0.5rem 2rem;  
     font-size: 1.3rem; 
     border-radius: 6px;
+     cursor: pointer;
 }
 
-#cell:hover{
+.cell:hover{
     background-color:var(--indigo-light);
     color: white;
-    cursor: pointer;
-   
 }
 
 .cell-block a{
    text-decoration: none;  
-   color: var(--indigo-color);
+ 
 }
 .cell-block a:visited {
    text-decoration: none; 
-  color: var(--indigo-color);
 }
 
-#cell:focus {
+.active-cell {
     background-color:var(--indigo-color);
     color: white;
     
 }
+.inactive-cell {
+    color: var(--indigo-color);
+}
+
 .cell-block .material-icons{
     margin-right: 20px;
 }
