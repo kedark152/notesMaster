@@ -47,11 +47,25 @@ export const notesReducer = (state, { type, payload }) => {
       return {
         ...state,
         isPinned: !payload.isPinned,
-        noteList: togglePin(state, payload),
+        notesList: togglePin(state, payload),
       };
 
-    case "DELETE-NOTE":
-      return { ...state, notesList: deleteNote(state, payload) };
+    case "PERMANENT-DELETE-NOTE":
+      return {
+        ...state,
+        notesList: deleteNote(state, payload),
+      };
+
+    case "ARCHIVE-NOTE":
+      return {
+        ...state,
+        notesList: archiveNote(state, payload),
+      };
+    case "TRASH-NOTE":
+      return {
+        ...state,
+        notesList: trashNote(state, payload),
+      };
 
     case "ADD-NEW-LABEL":
       return {
@@ -135,6 +149,30 @@ function togglePin(state, payload) {
       state.notesList[i] = {
         ...state.notesList[i],
         isPinned: !payload.isPinned,
+      };
+    }
+  }
+  return state.notesList;
+}
+
+function archiveNote(state, payload) {
+  for (let i = 0; i < state.notesList.length; i++) {
+    if (state.notesList[i]._id == payload) {
+      state.notesList[i] = {
+        ...state.notesList[i],
+        isArchived: !state.notesList[i].isArchived,
+      };
+    }
+  }
+  return state.notesList;
+}
+
+function trashNote(state, payload) {
+  for (let i = 0; i < state.notesList.length; i++) {
+    if (state.notesList[i]._id == payload) {
+      state.notesList[i] = {
+        ...state.notesList[i],
+        isTrashed: !state.notesList[i].isTrashed,
       };
     }
   }
