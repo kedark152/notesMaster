@@ -1,0 +1,36 @@
+.filters-box-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.600);
+    place-items: center;
+    display: none;
+    z-index: 2; 
+}
+
+.filters-box-container{
+    border: 2px solid black;
+    width: 320px;
+    min-height: 5rem;
+    max-height: max-content;
+    background-color: var(--white);
+    font-family: var(--montserrat-font);
+    box-shadow: var(--box-shadow-1);
+    border-radius: var(--radius-md);
+}
+
+.filters-box-heading{
+    justify-content: space-between;
+}
+#filters-box-close{
+    cursor: pointer;
+}
+
+.hide-filter-box{
+    display: none;
+}
+.show-filter-box{
+    display: grid;
+}
