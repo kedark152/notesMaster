@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useContext, createContext, useReducer } from "react";
-import { notesReducer, notesInitialState } from "../utilities/notesReducer";
+import { notesReducer, notesInitialState } from "../reducer/notesReducer";
 
 const NotesContext = createContext(notesInitialState);
 
