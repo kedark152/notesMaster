@@ -34,7 +34,7 @@ export const LabelsPage = () => {
 
         <div className="labels-notes-listing flex-column-center">
           {lablesList.map((label) => (
-            <div key={uuid()} className="fw-bold mg-y-sm">
+            <div key={uuid()} id={label} className="fw-bold mg-y-sm">
               {label}
               {displayLabeledNotes(label)}
             </div>

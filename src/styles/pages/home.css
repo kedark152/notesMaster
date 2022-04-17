@@ -13,4 +13,11 @@
     background-image: var(--light-indigo-grad);
 }
 
+.filter-clear-btn {
+    cursor: pointer;
+}
+.filter-clear-btn:hover {
+   text-decoration: underline;
+   color: var(--red-color);
+}
 

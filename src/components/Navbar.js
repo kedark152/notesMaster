@@ -1,7 +1,8 @@
 import "../styles/layouts/navbar.css";
 import { Link } from "react-router-dom";
-
+import { useFilter } from "../context/filter-context";
 export const Navbar = () => {
+  const { dispatchFilter } = useFilter();
   return (
     <>
       <nav id="nav-bar">
@@ -12,8 +13,12 @@ export const Navbar = () => {
           <i className="material-icons" id="search-icon">
             search
           </i>
-          <i className="material-icons" id="filter-icon">
-            filter_list
+          <i
+            className="material-icons"
+            id="filter-icon"
+            onClick={() => dispatchFilter({ type: "SHOW-FILTER-BOX" })}
+          >
+            filter_alt
           </i>
           <input
             type="text"

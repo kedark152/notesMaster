@@ -70,3 +70,6 @@
    color: var(--indigo-color);
    cursor: pointer;
 }
+.labels-cell{
+    color: var(--indigo-color);
+}

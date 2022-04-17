@@ -4,7 +4,6 @@ import "../styles/component/notescard.css";
 import "../styles/utils/variable.css";
 import { useState } from "react";
 import { useNotes } from "../context/notes-context";
-import { getCurrentDate } from "../utilities/getCurrentDate";
 import { LabelBox } from "./LabelBox";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
@@ -112,7 +111,9 @@ export const NotesCard = ({ noteDetails }) => {
           >{`${displayPriority(_id).priority}`}</div>
         </div>
         <div className="bottom-section align-center">
-          <p className="creation-date">{`Created on ${getCurrentDate()}`}</p>
+          <p className="creation-date">{`Created on ${
+            notesState.notesList[getIndexOfNote(_id)].noteCreatedDate
+          }`}</p>
           <div className="icon-buttons align-center">
             <i
               className="material-icons"
