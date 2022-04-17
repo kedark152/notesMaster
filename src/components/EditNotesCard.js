@@ -5,6 +5,7 @@ import "../styles/utils/variable.css";
 import { useNotes } from "../context/notes-context";
 import { v4 as uuid } from "uuid";
 import { toast } from "react-toastify";
+import { getCurrentDate } from "../utilities/getCurrentDate";
 
 export const EditNotesCard = () => {
   const editNotesForm = useRef(null);
@@ -14,6 +15,7 @@ export const EditNotesCard = () => {
 
   const handleSaveForm = () => {
     const form = editNotesForm.current;
+    const currentDate = getCurrentDate();
     if (
       form["editTitle"].value.length > 0 &&
       form["editBody"].value.length > 0
@@ -31,6 +33,7 @@ export const EditNotesCard = () => {
         isPinned: notesState.isPinned,
         labelsData: [],
         noteColor: "noteWhite",
+        noteCreatedDate: currentDate,
       };
     } else {
       setErrorText("Title & Body Field should not be Blank");
