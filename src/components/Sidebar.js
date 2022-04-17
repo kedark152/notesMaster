@@ -1,12 +1,12 @@
 import { useNotes } from "../context/notes-context";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import "../styles/layouts/sidebar.css";
 
 export const Sidebar = () => {
-  const { dispatchNotes } = useNotes();
+  const { notesState, dispatchNotes } = useNotes();
   const [labelValue, setLabelValue] = useState("");
   const typeNewLabel = (e) => {
     let labelName = e.target.value;
@@ -40,6 +40,12 @@ export const Sidebar = () => {
           >
             <i className="material-icons">label</i>Label
           </NavLink>
+          {/* Display labels in Sidebar */}
+          {notesState.allLabels.map((label) => (
+            <Link class="cell labels-cell" key={uuid()} to={`/labels#${label}`}>
+              <i className="material-icons"> label </i> {label}
+            </Link>
+          ))}
           <NavLink
             className={({ isActive }) =>
               isActive ? "cell active-cell" : "cell inactive-cell"
