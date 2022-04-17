@@ -1,5 +1,6 @@
 import "../styles/pages/landingpage.css";
 import "../styles/utils/variable.css";
+import { Link } from "react-router-dom";
 
 export const LandingPage = () => {
   return (
@@ -26,12 +27,18 @@ export const LandingPage = () => {
             </p>
           </div>
           <div className="page-links-section align-center pd-sm">
-            <a href="#" className="btn btn-solid fw-bold primary-bg-color">
+            <Link
+              to="/signup"
+              className="btn btn-solid fw-bold primary-bg-color"
+            >
               Sign up
-            </a>
-            <a href="#" className="primary-color fw-bold no-txt-decoration">
+            </Link>
+            <Link
+              to="/login"
+              className="primary-color fw-bold no-txt-decoration"
+            >
               Already Have an Account?
-            </a>
+            </Link>
           </div>
         </div>
         <img
