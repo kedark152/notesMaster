@@ -12,18 +12,21 @@ import { LabelChip } from "./LabelChip";
 import { ColorBox } from "./ColorBox";
 
 export const NotesCard = ({ noteDetails }) => {
-  const { _id, title, body, isPinned } = noteDetails;
+  const { _id, title, body, isPinned, isArchived, isTrashed } = noteDetails;
   const { notesState, dispatchNotes } = useNotes();
 
   const [labelBox, setLabelBox] = useState(false);
   const [colorBox, setColorBox] = useState(false);
 
+  const getIndexOfNote = (_id) => {
+    const indexOfNote = notesState.notesList.findIndex(
+      (note) => note._id == _id
+    );
+    return indexOfNote;
+  };
+
   const displayLabels = (_id) => {
-    for (let i = 0; i < notesState.notesList.length; i++) {
-      if (notesState.notesList[i]._id == _id) {
-        return notesState.notesList[i].labelsData;
-      }
-    }
+    return notesState.notesList[getIndexOfNote(_id)].labelsData;
   };
   const displayNoteColor = (_id) => {
     if (notesState.notesList.length > 0) {
@@ -37,20 +40,16 @@ export const NotesCard = ({ noteDetails }) => {
     }
   };
   const displayPriority = (_id) => {
-    for (let i = 0; i < notesState.notesList.length; i++) {
-      if (notesState.notesList[i]._id == _id) {
-        let priorityName = notesState.notesList[i].priority;
-        switch (notesState.notesList[i].priority) {
-          case "none":
-            return { priority: priorityName, priorityClass: "priority-none" };
-          case "high":
-            return { priority: priorityName, priorityClass: "priority-high" };
-          case "medium":
-            return { priority: priorityName, priorityClass: "priority-medium" };
-          case "low":
-            return { priority: priorityName, priorityClass: "priority-low" };
-        }
-      }
+    let priorityName = notesState.notesList[getIndexOfNote(_id)].priority;
+    switch (notesState.notesList[getIndexOfNote(_id)].priority) {
+      case "none":
+        return { priority: priorityName, priorityClass: "priority-none" };
+      case "high":
+        return { priority: priorityName, priorityClass: "priority-high" };
+      case "medium":
+        return { priority: priorityName, priorityClass: "priority-medium" };
+      case "low":
+        return { priority: priorityName, priorityClass: "priority-low" };
     }
   };
   return (
@@ -67,12 +66,35 @@ export const NotesCard = ({ noteDetails }) => {
             className={
               isPinned ? `material-icons primary-color` : `material-icons grey`
             }
-            onClick={() =>
-              dispatchNotes({
-                type: "NOTE-PIN",
-                payload: { _id, title, body, isPinned },
-              })
-            }
+            onClick={() => {
+              if (!isPinned && isArchived) {
+                dispatchNotes({ type: "ARCHIVE-NOTE", payload: _id });
+                dispatchNotes({
+                  type: "NOTE-PIN",
+                  payload: {
+                    _id,
+                    title,
+                    body,
+                    isPinned,
+                    isArchived,
+                    isTrashed,
+                  },
+                });
+                toast.success("Note Pinned & Un-Archived");
+              } else {
+                dispatchNotes({
+                  type: "NOTE-PIN",
+                  payload: {
+                    _id,
+                    title,
+                    body,
+                    isPinned,
+                    isArchived,
+                    isTrashed,
+                  },
+                });
+              }
+            }}
           >
             push_pin
           </i>
@@ -84,7 +106,7 @@ export const NotesCard = ({ noteDetails }) => {
               <LabelChip key={uuid()} labelName={label} />
             ))}
           </div>
-          {console.log(notesState)}
+
           <div
             className={`show-priority ${displayPriority(_id).priorityClass}`}
           >{`${displayPriority(_id).priority}`}</div>
@@ -121,12 +143,60 @@ export const NotesCard = ({ noteDetails }) => {
             >
               label
             </i>
-            <i className="material-icons">archive</i>
             <i
               className="material-icons"
               onClick={() => {
-                toast.success("Deleted Note");
-                dispatchNotes({ type: "DELETE-NOTE", payload: _id });
+                if (isPinned && !isArchived) {
+                  dispatchNotes({ type: "ARCHIVE-NOTE", payload: _id });
+                  dispatchNotes({
+                    type: "NOTE-PIN",
+                    payload: {
+                      _id,
+                      title,
+                      body,
+                      isPinned,
+                      isArchived,
+                      isTrashed,
+                    },
+                  });
+
+                  toast.success("Note unpinned & Archived");
+                } else {
+                  toast.success(
+                    notesState.notesList[getIndexOfNote(_id)].isArchived
+                      ? `Note Unarchived: Moved to Home`
+                      : `Moved to Archive`
+                  );
+                  dispatchNotes({ type: "ARCHIVE-NOTE", payload: _id });
+                }
+              }}
+            >
+              {notesState.notesList[getIndexOfNote(_id)].isArchived
+                ? `unarchive`
+                : `archive`}
+            </i>
+            <i
+              className="material-icons"
+              onClick={() => {
+                if (isPinned && !isTrashed) {
+                  dispatchNotes({ type: "TRASH-NOTE", payload: _id });
+                  dispatchNotes({
+                    type: "NOTE-PIN",
+                    payload: {
+                      _id,
+                      title,
+                      body,
+                      isPinned,
+                      isArchived,
+                      isTrashed,
+                    },
+                  });
+
+                  toast.success("Note unpinned & moved to Trash");
+                } else {
+                  toast.success("Note Moved to Trash");
+                  dispatchNotes({ type: "TRASH-NOTE", payload: _id });
+                }
               }}
             >
               delete

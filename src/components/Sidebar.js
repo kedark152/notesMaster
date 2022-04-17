@@ -1,6 +1,6 @@
 import { useNotes } from "../context/notes-context";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import "../styles/layouts/sidebar.css";
@@ -24,21 +24,46 @@ export const Sidebar = () => {
     <>
       <aside className="sidebar">
         <div className="cell-block flex-column">
-          <Link tabIndex="1" id="cell" to="/home">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "cell active-cell" : "cell inactive-cell"
+            }
+            to="/home"
+          >
             <i className="material-icons">home</i>Home
-          </Link>
-          <Link tabIndex="2" id="cell" to="/labels">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "cell active-cell" : "cell inactive-cell"
+            }
+            to="/labels"
+          >
             <i className="material-icons">label</i>Label
-          </Link>
-          <a tabIndex="3" id="cell">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "cell active-cell" : "cell inactive-cell"
+            }
+            to="/archive"
+          >
             <i className="material-icons">archive</i>Archive
-          </a>
-          <a tabIndex="4" id="cell">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "cell active-cell" : "cell inactive-cell"
+            }
+            to="/trash"
+          >
             <i className="material-icons">delete</i>Trash
-          </a>
-          <a tabIndex="5" id="cell">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "cell active-cell" : "cell inactive-cell"
+            }
+            to="/profile"
+          >
             <i className="material-icons">account_circle</i>Profile
-          </a>
+          </NavLink>
         </div>
         <div className="align-center add-label-input">
           <input

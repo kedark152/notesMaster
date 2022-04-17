@@ -6,14 +6,11 @@ import { EditNotesCard } from "../components/EditNotesCard";
 import { useNotes } from "../context/notes-context";
 import { Sidebar } from "../components/Sidebar";
 
-export const Home = () => {
+export const ArchivePage = () => {
   const { notesState } = useNotes();
 
-  const pinnedNotesList = notesState.notesList.filter(
-    (note) => note.isPinned && !note.isArchived && !note.isTrashed
-  );
-  const othersNotesList = notesState.notesList.filter(
-    (note) => !note.isPinned && !note.isArchived && !note.isTrashed
+  const othersArchiveNotesList = notesState.notesList.filter(
+    (note) => !note.isPinned && note.isArchived && !note.isTrashed
   );
   return (
     <>
@@ -25,18 +22,10 @@ export const Home = () => {
 
         <div className="notes-listing flex-column-center">
           <div className="fw-bold mg-y-sm">
-            PINNED ({pinnedNotesList.length})
+            ARCHIVED NOTES ({othersArchiveNotesList.length})
           </div>
 
-          {pinnedNotesList.map((note) => (
-            <NotesCard key={note._id} noteDetails={note} />
-          ))}
-
-          <div className="fw-bold mg-y-sm">
-            OTHERS ({othersNotesList.length})
-          </div>
-
-          {othersNotesList.map((note) => (
+          {othersArchiveNotesList.map((note) => (
             <NotesCard key={note._id} noteDetails={note} />
           ))}
         </div>
