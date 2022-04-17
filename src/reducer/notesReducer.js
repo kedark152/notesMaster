@@ -133,6 +133,7 @@ function saveNewNote(state, payload) {
           labelsData: payload.labelsData,
           priority: state.priority,
           noteColor: "noteWhite",
+          noteCreatedDate: payload.noteCreatedDate,
         },
       ];
     }
