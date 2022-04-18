@@ -6,6 +6,8 @@ import { LabelsPage } from "../pages/LabelsPage";
 import { ArchivePage } from "../pages/ArchivePage";
 import { TrashPage } from "../pages/TrashPage";
 import { ProfilePage } from "../pages/ProfilePage";
+import { Login } from "../pages/Login";
+import { Signup } from "../pages/Signup";
 
 export const PageRoutes = () => {
   return (
@@ -16,6 +18,8 @@ export const PageRoutes = () => {
       <Route path="/archive" element={<ArchivePage />} />
       <Route path="/trash" element={<TrashPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/mock" element={<Mockman />} />
     </Routes>
   );
