@@ -1,73 +1,84 @@
 /* Nav bar CSS */
-nav a{
-    text-decoration: none;
+nav a {
+  text-decoration: none;
 }
 
-nav{
-    display: flex;
-    align-items: center;
-    background-color: var(--white);
-    padding: 1rem 0.75rem;
-    box-shadow: var(--box-shadow-simple);
-    font-family: 'Acme', sans-serif;
-    position: relative;
-    top: 0;
-    width: 100%;
-
+nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  padding: 1rem 0.75rem;
+  box-shadow: var(--box-shadow-simple);
+  font-family: "Acme", sans-serif;
+  position: relative;
+  top: 0;
+  width: 100%;
 }
 
-.nav-brand a{
-    font-weight: var(--wgt-bold-dark);
-    color: var(--indigo-color);
+.nav-brand a {
+  font-weight: var(--wgt-bold-dark);
+  color: var(--indigo-color);
 }
 
-.nav-pills{
-    display: flex;
-    margin-left: auto;
-    flex: 0 1 12rem;
-    justify-content: space-around;
-    align-items: center;
-    
+.nav-pills {
+  display: flex;
+  margin-left: auto;
 }
-.nav-pills i{
-   cursor: pointer;
-   color: var(--indigo-color);
+.btn-login {
+  margin: 0 1rem;
+  background-color: var(--indigo-color);
+  cursor: pointer;
 }
-
-.nav-pills a{
-    color: var(--indigo-color);
-}
-
 /* Search Bar */
-#search-bar, .search-field{
-    border-radius: 5px;
-    border: 2px solid var(--indigo-color);
-    margin-left: auto;
+
+#search-bar,
+.search-field {
+  border-radius: 5px;
+  border: 2px solid var(--indigo-color);
+  /* margin-left: auto; */
 }
 
-.search-field{
-   position: relative;
-   width: 350px;
-   background-color: var(--white);
-
+.search-field {
+  margin-left: 15rem;
+  position: relative;
+  width: 550px;
+  background-color: var(--white);
 }
 
-#search-icon{
-    position: absolute;
-    top: 20%;
-    right: 12%; 
+#search-icon {
+  position: absolute;
+  top: 20%;
+  right: 12%;
 }
-#filter-icon{
-    position: absolute;
-    top: 20%;
-    right: 2%; 
-    cursor: pointer;
+#filter-icon {
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  cursor: pointer;
 }
 
-#search-bar{
-    border: none;
-    height: 2.5rem;
-    width: 75%;
-    font-size: 1.2rem;
-    padding: 0 0.5rem;
+#search-bar {
+  border: none;
+  height: 2.5rem;
+  width: 75%;
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.mobile-menu-icon {
+  display: none;
+}
+@media screen and (max-width: 800px) {
+  .mobile-menu-icon {
+    display: block;
+  }
+  .nav-brand a {
+    display: none;
+  }
+  .search-field {
+    margin-left: 1rem;
+  }
+  .btn-login {
+    display: none;
+  }
 }
