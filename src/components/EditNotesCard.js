@@ -4,25 +4,24 @@ import "../styles/component/editnotes.css";
 import "../styles/utils/variable.css";
 import { useNotes } from "../context/notes-context";
 import { v4 as uuid } from "uuid";
-import { toast } from "react-toastify";
 import { getCurrentDate } from "../utilities/getCurrentDate";
+import { createNewNote, updateNote } from "../services/notesServices";
+import { useAuth } from "../context/auth-context";
 
 export const EditNotesCard = () => {
   const editNotesForm = useRef(null);
   const { notesState, dispatchNotes } = useNotes();
+  const { auth } = useAuth();
 
   const [errorText, setErrorText] = useState("");
 
-  const handleSaveForm = () => {
+  const handleSaveNewNote = () => {
     const form = editNotesForm.current;
     const currentDate = getCurrentDate();
     if (
       form["editTitle"].value.length > 0 &&
       form["editBody"].value.length > 0
     ) {
-      notesState.isEditing
-        ? toast.info("Edited Note")
-        : toast.success("Saved Note");
       setErrorText("");
 
       return {
@@ -34,18 +33,58 @@ export const EditNotesCard = () => {
         labelsData: [],
         noteColor: "noteWhite",
         noteCreatedDate: currentDate,
+        priority: notesState.priority,
       };
     } else {
       setErrorText("Title & Body Field should not be Blank");
       return { editBoxStatus: "show-edit-box" };
     }
   };
+  const handleUpdateNote = () => {
+    const form = editNotesForm.current;
+
+    if (
+      form["editTitle"].value.length > 0 &&
+      form["editBody"].value.length > 0
+    ) {
+      setErrorText("");
+
+      return {
+        _id: notesState._id,
+        title: form["editTitle"].value,
+        body: form["editBody"].value,
+        editBoxStatus: "hide-edit-box",
+        isPinned: notesState.isPinned,
+        priority: notesState.priority,
+      };
+    } else {
+      setErrorText("Title & Body Field should not be Blank");
+      return { editBoxStatus: "show-edit-box" };
+    }
+  };
+
+  const handleSaveButton = (e) => {
+    e.preventDefault();
+    notesState.isEditing
+      ? updateNote({
+          auth,
+          noteData: handleUpdateNote(),
+          dispatchNotes,
+        })
+      : createNewNote({
+          auth,
+          noteData: handleSaveNewNote(),
+          dispatchNotes,
+        });
+  };
+
   return (
     <>
       <div className={`edit-note-background ${notesState.setEditBox}`}>
         <form
           ref={editNotesForm}
-          className="edit-note-container pd-xsm mg-sm flex-column"
+          onSubmit={(e) => handleSaveButton(e)}
+          className={`edit-note-container pd-xsm mg-sm flex-column  ${notesState.noteColor}`}
         >
           <div className="top-section align-center">
             <textarea
@@ -58,6 +97,7 @@ export const EditNotesCard = () => {
               onChange={(e) =>
                 dispatchNotes({ type: "EDIT-TITLE", payload: e.target.value })
               }
+              required
             />
             <i
               className={
@@ -86,6 +126,7 @@ export const EditNotesCard = () => {
               onChange={(e) =>
                 dispatchNotes({ type: "EDIT-BODY", payload: e.target.value })
               }
+              required
             />
             <label htmlFor="priority">Priority: </label>
             <select
@@ -106,17 +147,9 @@ export const EditNotesCard = () => {
           </div>
           <div className="bottom-section align-center">
             <div className="action-buttons align-center">
-              <a
-                className="btn btn-solid"
-                onClick={() =>
-                  dispatchNotes({
-                    type: "SAVE-NOTE",
-                    payload: handleSaveForm(),
-                  })
-                }
-              >
+              <button className="btn btn-solid" type="submit">
                 Save
-              </a>
+              </button>
               <a
                 className="btn btn-outline"
                 onClick={() => dispatchNotes({ type: "CANCEL-NOTE" })}
