@@ -1,82 +1,91 @@
-.color-box-container{
-    z-index: 1;
-    position: absolute;
-    bottom: -2.5rem;
-    right: 10.5rem;
-    box-shadow: var(--small-box-shadow);
-    width: max-content;
-    height: 3rem ;
-    font-size: 0.8rem;
-    font-family: var(--roboto-font);
-    padding: 5px;
-    overflow-y: auto;
-    display: block;   
-    background-color: black;
+.color-box-container {
+  z-index: 1;
+  position: absolute;
+  bottom: -2.5rem;
+  right: 10.5rem;
+  box-shadow: var(--small-box-shadow);
+  width: max-content;
+  height: 3rem;
+  font-size: 0.8rem;
+  font-family: var(--roboto-font);
+  padding: 5px;
+  overflow-y: auto;
+  display: block;
+  background-color: black;
 }
 
-.color-select{
+.color-select {
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
   display: inline-block;
-  margin-right:4px;
+  margin-right: 4px;
   cursor: pointer;
 }
 
-.color-select:hover{
-    border: 3px solid var(--indigo-color);
+.color-select:hover {
+  border: 3px solid var(--indigo-color);
 }
 
-.active-color{
-    border: 3px solid var(--indigo-color);
+.active-color {
+  border: 3px solid var(--indigo-color);
 }
 
 /* Note Class Backgroud Color Variables */
 .noteWhite {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
 .noteRed {
-    background-image: var(--red-grad);
-    
+  background-image: var(--red-grad);
 }
 
 .noteGreen {
-    background-image: var(--green-grad);
-    
+  background-image: var(--green-grad);
 }
 
 .noteBlue {
-    background-image: var(--blue-grad);
-    
+  background-image: var(--blue-grad);
 }
 
 .noteOrange {
-    background-image: var(--orange-grad);
-    
+  background-image: var(--orange-grad);
 }
 
 .noteViolet {
-    background-image: var(--violet-grad);
-    
+  background-image: var(--violet-grad);
 }
 
 .noteGrad1 {
-    background-color: var(--grad1-bgColor);
-    background-image: var(--mix-grad1);
-    
+  background-color: var(--grad1-bgColor);
+  background-image: var(--mix-grad1);
+  color: var(--white);
 }
 
 .noteGrad2 {
-    background-image: var(--mix-grad2);
-    
+  background-image: var(--mix-grad2);
 }
 
 .noteGrad3 {
-    background-color: var(--grad2-bgColor);
-    background-image: var(--mix-grad3);
-    color:var(--white);
-    
+  background-color: var(--grad2-bgColor);
+  background-image: var(--mix-grad3);
+  color: var(--white);
 }
 
+#cancel-color-box-btn {
+  background-color: black;
+  color: red;
+}
 
+@media screen and (max-width: 800px) {
+  .color-box-container {
+    bottom: -2.5rem;
+    right: 0rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .color-box-container {
+    bottom: -2.5rem;
+    right: -1rem;
+  }
+}
