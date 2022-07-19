@@ -2,23 +2,35 @@ import "../styles/component/filtersBox.css";
 import "../styles/utils/variable.css";
 import { useFilter } from "../context/filter-context";
 import { useNotes } from "../context/notes-context";
+import { toast } from "react-toastify";
+import { useRef } from "react";
 
 export const FiltersBox = () => {
   const { filterState, dispatchFilter } = useFilter();
   const { notesState } = useNotes();
+  const filterFormRef = useRef(null);
+
+  const resetFilter = () => {
+    filterFormRef.current.reset();
+    dispatchFilter({ type: "CLEAR-FILTERS" });
+    toast.success("Filter Cleared");
+  };
+
   return (
     <>
       <div className={`filters-box-background ${filterState.setFilterBox}`}>
-        <form className="filters-box-container pd-xsm mg-sm ">
-          <header className="flex filters-box-heading">
+        <form
+          ref={filterFormRef}
+          className="filters-box-container pd-xsm mg-sm "
+        >
+          <header className="align-center filters-box-heading">
             <h4>Filter and Sort Notes</h4>
-            <i
-              className="material-icons"
-              id="filters-box-close"
-              onClick={() => dispatchFilter({ type: "HIDE-FILTER-BOX" })}
+            <a
+              className="filter-clear-btn btn btn-solid mg-x-xsm"
+              onClick={resetFilter}
             >
-              close
-            </i>
+              CLEAR
+            </a>
           </header>
           <hr />
           <div className="main-section">
@@ -147,6 +159,13 @@ export const FiltersBox = () => {
               </div>
             )}
           </div>
+          <a
+            className="btn btn-outline mg-left-auto"
+            id="filters-box-close"
+            onClick={() => dispatchFilter({ type: "HIDE-FILTER-BOX" })}
+          >
+            Cancel
+          </a>
         </form>
       </div>
     </>
