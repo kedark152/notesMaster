@@ -80,7 +80,7 @@ export const Home = () => {
             <div className="fw-bold mg-y-sm">
               Search Query Notes ({searchNotesList.length})
               <a
-                className="filter-clear-btn mg-x-xsm"
+                className="search-clear-link mg-x-xsm"
                 onClick={() => {
                   setSearchQuery("");
                   toast.success("Search Query Cleared");

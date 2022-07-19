@@ -12,6 +12,13 @@
   padding: 1rem;
   background-image: var(--light-indigo-grad);
 }
+.search-clear-link {
+  cursor: pointer;
+}
+.search-clear-link:hover {
+  text-decoration: underline;
+  color: red;
+}
 
 @media screen and (max-width: 800px) {
   .notes-listing {
