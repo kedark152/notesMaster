@@ -8,19 +8,25 @@ import { TrashPage } from "../pages/TrashPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { Login } from "../pages/Login";
 import { Signup } from "../pages/Signup";
+import { RequiresAuth } from "./RequiresAuth";
+import { ErrorPage } from "../pages/ErrorPage";
 
 export const PageRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/labels" element={<LabelsPage />} />
-      <Route path="/archive" element={<ArchivePage />} />
-      <Route path="/trash" element={<TrashPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/mock" element={<Mockman />} />
+      <Route path="*" element={<ErrorPage />} />
+
+      <Route element={<RequiresAuth />}>
+        <Route path="/home" element={<Home />} />
+        <Route path="/archive" element={<ArchivePage />} />
+        <Route path="/trash" element={<TrashPage />} />
+        <Route path="/label/:labelName" element={<LabelsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
     </Routes>
   );
 };
