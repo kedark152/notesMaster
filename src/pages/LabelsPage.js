@@ -12,8 +12,8 @@ import { NoNotes } from "../components/NoNotes";
 
 export const LabelsPage = () => {
   const { notesState } = useNotes();
-  // const lablesList = notesState.allLabels;
   const { labelName } = useParams();
+
   const displayLabeledNotes = (label) => {
     const labledNotesList = notesState.notesList.filter((note) =>
       note.labelsData.includes(label)

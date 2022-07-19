@@ -40,7 +40,6 @@ export const Sidebar = () => {
           {/* Display labels in Sidebar */}
           {notesState.allLabels.map((label) => (
             <NavLink
-              // className="cell labels-cell"
               className={({ isActive }) =>
                 isActive ? "cell active-cell" : "cell inactive-cell"
               }

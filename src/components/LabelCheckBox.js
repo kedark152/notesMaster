@@ -3,7 +3,7 @@ import { useNotes } from "../context/notes-context";
 import { updateNoteLabels } from "../services/notesServices";
 import { useAuth } from "../context/auth-context";
 import { toast } from "react-toastify";
-// import { toast } from "react-toastify";
+
 export const LabelCheckBox = ({ labelId, labelName, noteId }) => {
   const { notesState, dispatchNotes } = useNotes();
   const { auth } = useAuth();
@@ -33,7 +33,6 @@ export const LabelCheckBox = ({ labelId, labelName, noteId }) => {
           type="checkbox"
           id={labelId}
           onClick={(e) => {
-            // e.stopImmediatePropagation;
             let labelCheckedStatus = e.target.checked;
             dispatchNotes({
               type: "TOGGLE-TICK-LABEL",
