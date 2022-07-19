@@ -1,17 +1,16 @@
 import "../styles/pages/home.css";
 import "../styles/utils/variable.css";
 import { Navbar } from "../components/Navbar";
-import { NotesCard } from "../components/NotesCard";
+import { ArchiveNotesCard } from "../components/ArchiveNotesCard";
 import { EditNotesCard } from "../components/EditNotesCard";
 import { useNotes } from "../context/notes-context";
 import { Sidebar } from "../components/Sidebar";
+import { NoNotes } from "../components/NoNotes";
 
 export const ArchivePage = () => {
   const { notesState } = useNotes();
 
-  const othersArchiveNotesList = notesState.notesList.filter(
-    (note) => !note.isPinned && note.isArchived && !note.isTrashed
-  );
+  const notesArchivesList = notesState.archivesList;
   return (
     <>
       <Navbar />
@@ -22,12 +21,20 @@ export const ArchivePage = () => {
 
         <div className="notes-listing flex-column-center">
           <div className="fw-bold mg-y-sm">
-            ARCHIVED NOTES ({othersArchiveNotesList.length})
+            ARCHIVED NOTES ({notesArchivesList.length})
           </div>
 
-          {othersArchiveNotesList.map((note) => (
-            <NotesCard key={note._id} noteDetails={note} />
+          {notesArchivesList.map((note) => (
+            <ArchiveNotesCard
+              key={note._id}
+              noteDetails={note}
+              list={notesArchivesList}
+            />
           ))}
+
+          {notesArchivesList.length == 0 && (
+            <NoNotes icon="archive" text={`No notes archived yet`} />
+          )}
         </div>
       </div>
     </>

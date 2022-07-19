@@ -6,11 +6,13 @@ import { EditNotesCard } from "../components/EditNotesCard";
 import { useNotes } from "../context/notes-context";
 import { Sidebar } from "../components/Sidebar";
 import "../styles/pages/labelsPage.css";
+import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { NoNotes } from "../components/NoNotes";
 
 export const LabelsPage = () => {
   const { notesState } = useNotes();
-  const lablesList = notesState.allLabels;
+  const { labelName } = useParams();
 
   const displayLabeledNotes = (label) => {
     const labledNotesList = notesState.notesList.filter((note) =>
@@ -18,9 +20,17 @@ export const LabelsPage = () => {
     );
     return (
       <>
-        {labledNotesList.map((note) => (
-          <NotesCard key={note._id} noteDetails={note} />
-        ))}
+        {labledNotesList.length > 0 &&
+          labledNotesList.map((note) => (
+            <NotesCard
+              key={note._id}
+              noteDetails={note}
+              list={labledNotesList}
+            />
+          ))}
+        {labledNotesList.length == 0 && (
+          <NoNotes icon="label" text={`No notes with ${labelName} label yet`} />
+        )}
       </>
     );
   };
@@ -33,12 +43,9 @@ export const LabelsPage = () => {
         <Sidebar />
 
         <div className="labels-notes-listing flex-column-center">
-          {lablesList.map((label) => (
-            <div key={uuid()} id={label} className="fw-bold mg-y-sm">
-              {label}
-              {displayLabeledNotes(label)}
-            </div>
-          ))}
+          <div key={uuid()} id={uuid()} className="fw-bold mg-y-sm">
+            {displayLabeledNotes(labelName)}
+          </div>
         </div>
       </div>
     </>

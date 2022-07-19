@@ -1,49 +1,79 @@
+/* eslint-disable react/prop-types */
 import "../styles/layouts/navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
-export const Navbar = () => {
+import { MobileMenu } from "./MobileMenu";
+import { useState } from "react";
+import { useAuth } from "../context/auth-context";
+import { toast } from "react-toastify";
+export const Navbar = ({ searchQuery, setSearchQuery }) => {
   const { dispatchFilter } = useFilter();
+  const location = useLocation();
+  const [mobileMenuStatus, setMobileMenuStatus] = useState(false);
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+    setAuth({ ...auth, token: "", isLoggedIn: false });
+    toast.success("Logout Success");
+    navigate("/");
+  };
   return (
     <>
       <nav id="nav-bar">
-        <div className="nav-brand fs-md">
+        <div className="nav-brand fs-md align-center">
+          <i
+            className="material-icons mobile-menu-icon"
+            onClick={() => setMobileMenuStatus((toggler) => !toggler)}
+          >
+            menu
+          </i>
           <Link to="/">NotesMaster</Link>
         </div>
-        <div className="search-field">
-          <i className="material-icons" id="search-icon">
-            search
-          </i>
-          <i
-            className="material-icons"
-            id="filter-icon"
-            onClick={() => dispatchFilter({ type: "SHOW-FILTER-BOX" })}
-          >
-            filter_alt
-          </i>
-          <input
-            type="text"
-            name="search-bar"
-            id="search-bar"
-            placeholder="Search"
-          />
-        </div>
-        <ul className="nav-pills fs-sm-plus fw-bold">
-          <li>
-            <i className="material-icons">grid_view</i>
-          </li>
-          <li>
-            <a href="#">Login</a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/kedark152/notesMaster"
-              target="_blank"
-              rel="noreferrer"
+        {location.pathname == "/home" && (
+          <div className="search-field">
+            <i className="material-icons" id="search-icon">
+              search
+            </i>
+            <i
+              className="material-icons"
+              id="filter-icon"
+              onClick={() => dispatchFilter({ type: "SHOW-FILTER-BOX" })}
             >
-              <i className="fab fa-github"></i>
-            </a>
+              tune
+            </i>
+            <input
+              type="text"
+              name="search-bar"
+              id="search-bar"
+              placeholder="Search your notes"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        )}
+        <ul className="nav-pills fs-sm fw-bold">
+          <li>
+            {auth.token ? (
+              <a className="btn btn-solid btn-login" onClick={logoutHandler}>
+                Logout
+                <i className="material-icons mg-left-xsm">logout</i>
+              </a>
+            ) : (
+              <Link to="/login" className="btn btn-solid btn-login">
+                Login
+                <i className="material-icons mg-left-xsm">login</i>
+              </Link>
+            )}
           </li>
         </ul>
+        <MobileMenu
+          mobileMenuStatus={mobileMenuStatus}
+          setMobileMenuStatus={setMobileMenuStatus}
+          logoutHandler={logoutHandler}
+        />
       </nav>
     </>
   );

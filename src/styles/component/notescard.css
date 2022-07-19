@@ -1,44 +1,37 @@
-
-
-.note-container{
-    
-    width: 600px;
-    min-height: 5rem;
-    max-height: max-content;
-    gap: 1rem;
-    /* background-color: var(--white); */
-    font-family: var(--montserrat-font);
-    box-shadow: var(--box-shadow-1);
-    border-radius: var(--radius-md);
-    position: relative;
-    
+.note-container {
+  width: 50vw;
+  min-height: 5rem;
+  max-height: max-content;
+  gap: 1rem;
+  font-family: var(--montserrat-font);
+  box-shadow: var(--box-shadow-1);
+  border-radius: var(--radius-md);
+  position: relative;
 }
 
-.note-container i{
-    cursor: pointer;
+.note-container i {
+  cursor: pointer;
 }
-.top-section i{
+.top-section i {
   margin-left: auto;
 }
 
-.icon-buttons{
-    margin-left: auto;
-    gap: 1rem;
-  
+.icon-buttons {
+  margin-left: auto;
+  gap: 1rem;
 }
 
-.note-container .material-icons{
+.note-container .material-icons {
   border-radius: 50%;
   padding: 5px;
 }
 
-.note-container .material-icons:hover{
-    color: var(--black);
-    background-color: var(--grey-lightest);
+.note-container .material-icons:hover {
+  color: var(--black);
+  background-color: var(--grey-lightest);
 }
 
-
-.chips{
+.chips {
   font-size: 1rem;
   margin: 7px 3px;
   border-radius: 7px;
@@ -48,10 +41,10 @@
   display: flex;
   justify-content: space-evenly;
   width: max-content;
-  white-space: nowrap;  /* To make sure that line doesn't breaks after space in words */
+  white-space: nowrap; /* To make sure that line doesn't breaks after space in words */
 }
 
-.show-priority{
+.show-priority {
   font-size: 0.9rem;
   padding: 4px 2px;
   margin: 1rem 0;
@@ -61,27 +54,29 @@
   font-weight: bold;
 }
 
-.priority-none{
+.priority-none {
   border: 1px solid var(--grey-dark);
   color: var(--grey-dark);
   background-color: var(--grey-lightest);
- 
 }
-.priority-high{
+.priority-high {
   border: 1px solid var(--red-color);
   color: var(--red-color);
   background-color: var(--red-light);
-  
-
 }
-.priority-medium{
+.priority-medium {
   border: 1px solid var(--yellow-color);
   color: var(--yellow-color);
-  background-color: var(--yellow-light);  
+  background-color: var(--yellow-light);
 }
-.priority-low{
+.priority-low {
   border: 1px solid var(--napier-green);
   color: var(--napier-green);
   background-color: var(--napier-green-light);
 }
 
+@media screen and (max-width: 800px) {
+  .note-container {
+    width: 89vw;
+  }
+}

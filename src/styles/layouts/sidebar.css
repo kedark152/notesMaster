@@ -1,75 +1,77 @@
-.sidebar{
-    padding: 2rem;
-    width: 20vw;
-    background-image: var(--light-indigo-grad);
-   
+.sidebar {
+  padding: 2rem;
+  width: 20vw;
+  background-image: var(--light-indigo-grad);
 }
 
-.cell-block{
-    display: flex;
-    flex-direction: column;
+.cell-block {
+  display: flex;
+  flex-direction: column;
 }
 
-.cell{
-    display: flex;
-   align-items: center;
-    margin: 3px;
-    padding: 0.5rem 2rem;  
-    font-size: 1.3rem; 
-    border-radius: 6px;
-     cursor: pointer;
+.cell {
+  display: flex;
+  align-items: center;
+  margin: 3px;
+  padding: 0.5rem 2rem;
+  font-size: 1.3rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.cell:hover{
-    background-color:var(--indigo-light);
-    color: white;
+.cell:hover {
+  background-color: var(--indigo-light);
+  color: var(--white);
 }
 
-.cell-block a{
-   text-decoration: none;  
- 
+.cell-block a {
+  text-decoration: none;
 }
 .cell-block a:visited {
-   text-decoration: none; 
+  text-decoration: none;
 }
 
 .active-cell {
-    background-color:var(--indigo-color);
-    color: white;
-    
+  background-color: var(--indigo-color);
+  color: var(--white);
 }
 .inactive-cell {
-    color: var(--indigo-color);
+  color: var(--indigo-color);
 }
 
-.cell-block .material-icons{
-    margin-right: 20px;
+.cell-block .material-icons {
+  margin-right: 20px;
 }
 
-.sidebar .add-label-input{
-    background-color: transparent;
-     border: 2px solid var(--indigo-color);
-    width: 10.5rem;
-    display: flex;
-    justify-content: space-evenly;
-    margin-left:1rem;
+.sidebar .add-label-input {
+  background-color: transparent;
+  border: 2px solid var(--indigo-color);
+  width: 10.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem;
 }
 
-.sidebar-input-label{
-   background-color: transparent;
-     border: none;
-     width: 8.5rem;
+.sidebar-input-label {
+  background-color: transparent;
+  border: none;
+  width: 8.5rem;
 }
 
-
-.btn-new-note{
-    cursor: pointer;
+.btn-new-note {
+  cursor: pointer;
 }
 
-.add-label-icon{
-   color: var(--indigo-color);
-   cursor: pointer;
+.add-label-icon {
+  color: var(--indigo-color);
+  cursor: pointer;
 }
-.labels-cell{
-    color: var(--indigo-color);
+.labels-cell {
+  color: var(--indigo-color);
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
 }

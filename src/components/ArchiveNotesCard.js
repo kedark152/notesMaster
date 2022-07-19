@@ -2,14 +2,16 @@
 
 import "../styles/component/notescard.css";
 import "../styles/utils/variable.css";
+
 import { useNotes } from "../context/notes-context";
-import { useAuth } from "../context/auth-context";
 
 import { v4 as uuid } from "uuid";
 import { LabelChip } from "./LabelChip";
-import { restoreFromTrash, deleteFromTrash } from "../services/trashServices";
 
-export const TrashNotesCard = ({ noteDetails, list }) => {
+import { useAuth } from "../context/auth-context";
+import { unArchiveNote } from "../services/archiveServices";
+
+export const ArchiveNotesCard = ({ noteDetails, list }) => {
   const { _id, title, body } = noteDetails;
   const { dispatchNotes } = useNotes();
   const { auth } = useAuth();
@@ -33,6 +35,7 @@ export const TrashNotesCard = ({ noteDetails, list }) => {
       return "noteWhite";
     }
   };
+
   const displayPriority = (_id) => {
     let priorityName = list[getIndexOfNote(_id)].priority;
     switch (list[getIndexOfNote(_id)].priority) {
@@ -70,30 +73,22 @@ export const TrashNotesCard = ({ noteDetails, list }) => {
           >{`${displayPriority(_id).priority}`}</div>
         </div>
         <div className="bottom-section align-center">
+          <p className="creation-date">{`Created on ${
+            list[getIndexOfNote(_id)].noteCreatedDate
+          }`}</p>
           <div className="icon-buttons align-center">
             <i
               className="material-icons"
               onClick={() => {
-                restoreFromTrash({
-                  token: auth.token,
+                unArchiveNote({
+                  auth,
                   noteId: _id,
+                  noteData: noteDetails,
                   dispatchNotes,
                 });
               }}
             >
-              restore
-            </i>
-            <i
-              className="material-icons"
-              onClick={() => {
-                deleteFromTrash({
-                  token: auth.token,
-                  noteId: _id,
-                  dispatchNotes,
-                });
-              }}
-            >
-              delete_forever
+              unarchive
             </i>
           </div>
         </div>
