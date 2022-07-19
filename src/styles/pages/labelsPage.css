@@ -1,16 +1,19 @@
-.labels-page-container{
-    font-family: var(--roboto-font);
-    min-height: 100vh;
-    max-height: max-content;
-    
+.labels-page-container {
+  font-family: var(--roboto-font);
+  min-height: 100vh;
+  max-height: max-content;
 }
 
 /* Notes Listing Container */
-.labels-notes-listing{
-    background-color: var(--grey-lightest);
-    width: 80vw;
-    padding: 1rem;
-    background-image: var(--light-indigo-grad);
+.labels-notes-listing {
+  background-color: var(--grey-lightest);
+  width: 80vw;
+  padding: 1rem;
+  background-image: var(--light-indigo-grad);
 }
 
-
+@media screen and (max-width: 800px) {
+  .labels-notes-listing {
+    width: 100%;
+  }
+}
