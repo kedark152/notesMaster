@@ -1,6 +1,6 @@
 import { useNotes } from "../context/notes-context";
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import "../styles/layouts/sidebar.css";
@@ -11,12 +11,16 @@ export const Sidebar = () => {
   const typeNewLabel = (e) => {
     let labelName = e.target.value;
     if (e.keyCode === 13) {
-      setLabelValue("");
-      dispatchNotes({
-        type: "ADD-NEW-LABEL",
-        payload: { newLabelId, labelName },
-      });
-      toast.success(`Added New Label - ${labelName}`);
+      if (labelName.length > 0) {
+        setLabelValue("");
+        dispatchNotes({
+          type: "ADD-NEW-LABEL",
+          payload: { newLabelId, labelName },
+        });
+        toast.success(`Added New Label - ${labelName}`);
+      } else {
+        toast.error("Please Type Label Name");
+      }
     }
   };
   let newLabelId = uuid();
@@ -32,19 +36,19 @@ export const Sidebar = () => {
           >
             <i className="material-icons">home</i>Home
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "cell active-cell" : "cell inactive-cell"
-            }
-            to="/labels"
-          >
-            <i className="material-icons">label</i>Label
-          </NavLink>
+
           {/* Display labels in Sidebar */}
           {notesState.allLabels.map((label) => (
-            <Link class="cell labels-cell" key={uuid()} to={`/labels#${label}`}>
+            <NavLink
+              // className="cell labels-cell"
+              className={({ isActive }) =>
+                isActive ? "cell active-cell" : "cell inactive-cell"
+              }
+              key={uuid()}
+              to={`/label/${label}`}
+            >
               <i className="material-icons"> label </i> {label}
-            </Link>
+            </NavLink>
           ))}
           <NavLink
             className={({ isActive }) =>
@@ -85,13 +89,17 @@ export const Sidebar = () => {
             <i
               className="material-icons add-label-icon"
               onClick={() => {
-                dispatchNotes({
-                  type: "ADD-NEW-LABEL",
-                  // eslint-disable-next-line no-undef
-                  payload: { newLabelId, labelName: labelValue },
-                });
-                setLabelValue("");
-                toast.success(`Added New Label - ${labelValue}`);
+                if (labelValue.length > 0) {
+                  dispatchNotes({
+                    type: "ADD-NEW-LABEL",
+                    // eslint-disable-next-line no-undef
+                    payload: { newLabelId, labelName: labelValue },
+                  });
+                  setLabelValue("");
+                  toast.success(`Added New Label - ${labelValue}`);
+                } else {
+                  toast.error(`Please Type Label Name`);
+                }
               }}
             >
               add
