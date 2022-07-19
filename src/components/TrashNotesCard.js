@@ -3,30 +3,30 @@
 import "../styles/component/notescard.css";
 import "../styles/utils/variable.css";
 import { useNotes } from "../context/notes-context";
+import { useAuth } from "../context/auth-context";
 
-import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import { LabelChip } from "./LabelChip";
+import { restoreFromTrash, deleteFromTrash } from "../services/trashServices";
 
-export const TrashNotesCard = ({ noteDetails }) => {
+export const TrashNotesCard = ({ noteDetails, list }) => {
   const { _id, title, body } = noteDetails;
-  const { notesState, dispatchNotes } = useNotes();
+  const { dispatchNotes } = useNotes();
+  const { auth } = useAuth();
 
   const getIndexOfNote = (_id) => {
-    const indexOfNote = notesState.notesList.findIndex(
-      (note) => note._id == _id
-    );
+    const indexOfNote = list.findIndex((note) => note._id == _id);
     return indexOfNote;
   };
 
   const displayLabels = (_id) => {
-    return notesState.notesList[getIndexOfNote(_id)].labelsData;
+    return list[getIndexOfNote(_id)].labelsData;
   };
   const displayNoteColor = (_id) => {
-    if (notesState.notesList.length > 0) {
-      for (let i = 0; i < notesState.notesList.length; i++) {
-        if (notesState.notesList[i]._id == _id) {
-          return notesState.notesList[i].noteColor;
+    if (list.length > 0) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i]._id == _id) {
+          return list[i].noteColor;
         }
       }
     } else {
@@ -34,8 +34,8 @@ export const TrashNotesCard = ({ noteDetails }) => {
     }
   };
   const displayPriority = (_id) => {
-    let priorityName = notesState.notesList[getIndexOfNote(_id)].priority;
-    switch (notesState.notesList[getIndexOfNote(_id)].priority) {
+    let priorityName = list[getIndexOfNote(_id)].priority;
+    switch (list[getIndexOfNote(_id)].priority) {
       case "none":
         return { priority: priorityName, priorityClass: "priority-none" };
       case "high":
@@ -64,7 +64,7 @@ export const TrashNotesCard = ({ noteDetails }) => {
               <LabelChip key={uuid()} labelName={label} />
             ))}
           </div>
-    
+
           <div
             className={`show-priority ${displayPriority(_id).priorityClass}`}
           >{`${displayPriority(_id).priority}`}</div>
@@ -74,8 +74,11 @@ export const TrashNotesCard = ({ noteDetails }) => {
             <i
               className="material-icons"
               onClick={() => {
-                toast.success("Note Restored");
-                dispatchNotes({ type: "TRASH-NOTE", payload: _id });
+                restoreFromTrash({
+                  token: auth.token,
+                  noteId: _id,
+                  dispatchNotes,
+                });
               }}
             >
               restore
@@ -83,8 +86,11 @@ export const TrashNotesCard = ({ noteDetails }) => {
             <i
               className="material-icons"
               onClick={() => {
-                toast.success("Note Deleted Permanently");
-                dispatchNotes({ type: "PERMANENT-DELETE-NOTE", payload: _id });
+                deleteFromTrash({
+                  token: auth.token,
+                  noteId: _id,
+                  dispatchNotes,
+                });
               }}
             >
               delete_forever
