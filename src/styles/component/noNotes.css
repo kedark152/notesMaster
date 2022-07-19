@@ -1,0 +1,18 @@
+/* No notes component */
+.empty-note-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--indigo-light);
+  padding-top: 5rem;
+}
+
+.empty-note-icon {
+  font-size: 6rem;
+}
+
+.empty-note-text {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
