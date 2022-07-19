@@ -4,13 +4,13 @@ import { Navbar } from "../components/Navbar";
 import { TrashNotesCard } from "../components/TrashNotesCard";
 import { useNotes } from "../context/notes-context";
 import { Sidebar } from "../components/Sidebar";
+import { NoNotes } from "../components/NoNotes";
 
 export const TrashPage = () => {
   const { notesState } = useNotes();
 
-  const trashedNotesList = notesState.notesList.filter(
-    (note) => note.isTrashed
-  );
+  const trashedNotesList = notesState.trashList;
+
   return (
     <>
       <Navbar />
@@ -24,8 +24,15 @@ export const TrashPage = () => {
           </div>
 
           {trashedNotesList.map((note) => (
-            <TrashNotesCard key={note._id} noteDetails={note} />
+            <TrashNotesCard
+              key={note._id}
+              noteDetails={note}
+              list={trashedNotesList}
+            />
           ))}
+          {trashedNotesList.length == 0 && (
+            <NoNotes icon="delete" text={`No notes in Trash yet`} />
+          )}
         </div>
       </div>
     </>
