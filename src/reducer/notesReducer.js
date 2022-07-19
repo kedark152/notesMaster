@@ -10,9 +10,10 @@ export const notesReducer = (state, { type, payload }) => {
         isEditing: false,
         isPinned: false,
         priority: "none",
+        noteColor: "noteWhite",
       };
 
-    case "EDIT-NOTE":
+    case "OPEN-EDIT-NOTE":
       return {
         ...state,
         setEditBox: "show-edit-box",
@@ -21,11 +22,17 @@ export const notesReducer = (state, { type, payload }) => {
         body: payload.body,
         isEditing: payload.isEditing,
         isPinned: payload.isPinned,
+        noteColor: payload.noteColor,
         priority: "none",
       };
 
     case "CANCEL-NOTE":
-      return { ...state, setEditBox: "hide-edit-box", isEditing: false };
+      return {
+        ...state,
+        setEditBox: "hide-edit-box",
+        isEditing: false,
+        noteColor: "noteWhite",
+      };
 
     case "EDIT-TITLE":
       return { ...state, title: payload };
@@ -37,7 +44,13 @@ export const notesReducer = (state, { type, payload }) => {
       return {
         ...state,
         setEditBox: payload.editBoxStatus,
-        notesList: saveNewNote(state, payload),
+        notesList: payload,
+      };
+    case "UPDATE-NOTE":
+      return {
+        ...state,
+        setEditBox: payload.editBoxStatus,
+        notesList: payload,
       };
 
     case "EDITOR-PIN":
@@ -50,21 +63,25 @@ export const notesReducer = (state, { type, payload }) => {
         notesList: togglePin(state, payload),
       };
 
-    case "PERMANENT-DELETE-NOTE":
+    case "DELETE-FROM-TRASH":
       return {
         ...state,
-        notesList: deleteNote(state, payload),
+        trashList: payload,
       };
 
     case "ARCHIVE-NOTE":
+    case "UNARCHIVE-NOTE":
       return {
         ...state,
-        notesList: archiveNote(state, payload),
+        notesList: payload.notes,
+        archivesList: payload.archives,
       };
     case "TRASH-NOTE":
+    case "RESTORE-FROM-TRASH":
       return {
         ...state,
-        notesList: trashNote(state, payload),
+        notesList: payload.notes,
+        trashList: payload.trash,
       };
 
     case "ADD-NEW-LABEL":
@@ -92,6 +109,8 @@ export const notesReducer = (state, { type, payload }) => {
 
 export const notesInitialState = {
   notesList: [],
+  trashList: [],
+  archivesList: [],
   setEditBox: "hide-edit-box",
   _id: "", //helper variables
   title: "",
@@ -101,48 +120,6 @@ export const notesInitialState = {
   allLabels: [],
   priority: "none",
 };
-
-function saveNewNote(state, payload) {
-  if (payload.editBoxStatus === "hide-edit-box") {
-    //To Edit the Existing Note
-
-    if (state.isEditing) {
-      for (let i = 0; i < state.notesList.length; i++) {
-        if (state.notesList[i]._id == state._id) {
-          state.notesList[i] = {
-            ...state.notesList[i],
-            _id: state._id,
-            title: state.title,
-            body: state.body,
-            isPinned: state.isPinned,
-            priority: state.priority,
-          };
-        }
-      }
-      return state.notesList;
-    }
-    //To Create new Note
-    else {
-      return [
-        ...state.notesList,
-        {
-          _id: payload._id,
-          title: payload.title,
-          body: payload.body,
-          isPinned: payload.isPinned,
-          labelsData: payload.labelsData,
-          priority: state.priority,
-          noteColor: "noteWhite",
-          noteCreatedDate: payload.noteCreatedDate,
-        },
-      ];
-    }
-  }
-  //On Empty Fields entered by user, state will not change.
-  else {
-    return state.notesList;
-  }
-}
 
 function togglePin(state, payload) {
   for (let i = 0; i < state.notesList.length; i++) {
@@ -154,34 +131,6 @@ function togglePin(state, payload) {
     }
   }
   return state.notesList;
-}
-
-function archiveNote(state, payload) {
-  for (let i = 0; i < state.notesList.length; i++) {
-    if (state.notesList[i]._id == payload) {
-      state.notesList[i] = {
-        ...state.notesList[i],
-        isArchived: !state.notesList[i].isArchived,
-      };
-    }
-  }
-  return state.notesList;
-}
-
-function trashNote(state, payload) {
-  for (let i = 0; i < state.notesList.length; i++) {
-    if (state.notesList[i]._id == payload) {
-      state.notesList[i] = {
-        ...state.notesList[i],
-        isTrashed: !state.notesList[i].isTrashed,
-      };
-    }
-  }
-  return state.notesList;
-}
-
-function deleteNote(state, payload) {
-  return state.notesList.filter((note) => note._id !== payload);
 }
 
 function toggleTickLabel(state, payload) {
