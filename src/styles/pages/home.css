@@ -1,23 +1,29 @@
-.home-page-container{
-    font-family: var(--roboto-font);
-    min-height: 100vh;
-    max-height: max-content;
-    
+.home-page-container {
+  font-family: var(--roboto-font);
+  min-height: 100vh;
+  max-height: max-content;
 }
-
+.btn-add-float {
+  display: none;
+}
 /* Notes Listing Container */
-.notes-listing{
-    background-color: var(--grey-lightest);
-    width: 80vw;
-    padding: 1rem;
-    background-image: var(--light-indigo-grad);
+.notes-listing {
+  width: 80vw;
+  padding: 1rem;
+  background-image: var(--light-indigo-grad);
 }
 
-.filter-clear-btn {
-    cursor: pointer;
+@media screen and (max-width: 800px) {
+  .notes-listing {
+    width: 100%;
+  }
+  .btn-add-float {
+    display: block;
+    position: fixed;
+    bottom: 1rem;
+    right: 1.5rem;
+    border: 2px solid var(--indigo-light);
+    z-index: 2;
+    background-color: var(--indigo-color);
+  }
 }
-.filter-clear-btn:hover {
-   text-decoration: underline;
-   color: var(--red-color);
-}
-
