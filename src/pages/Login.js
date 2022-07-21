@@ -97,15 +97,8 @@ export const Login = () => {
             >
               {passwordType === "password" ? "visibility_off" : "visibility"}
             </i>
-            <Link to="/login" className="forgot-password">
-              Forgot Password?
-            </Link>
           </div>
-          {/*  Remember Me  */}
-          <div className="remember-item mg-xsm fw-bold align-center">
-            <input type="checkbox" className="mg-xsm" id="remember" />
-            <label htmlFor="terms">Remember Me</label>
-          </div>
+
           {/* Buttons */}
           <button
             type="submit"
