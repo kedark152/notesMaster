@@ -72,6 +72,7 @@ export const Signup = () => {
               id="first-name"
               name="firstName"
               placeholder="First Name"
+              required
             />
             <label htmlFor="last-name" className="mg-bottom-xsm">
               Last Name
@@ -82,6 +83,7 @@ export const Signup = () => {
               id="last-name"
               name="lastName"
               placeholder="Last Name"
+              required
             />
           </div>
           {/* Email-id */}
@@ -96,6 +98,7 @@ export const Signup = () => {
               name="emailId"
               className="mg-bottom-xsm"
               placeholder="user@example.com"
+              required
             />
           </div>
           {/* <!-- Password --> */}
@@ -161,6 +164,7 @@ export const Signup = () => {
               className="mg-xsm"
               name="termsTick"
               id="terms"
+              required
             />
             <label htmlFor="terms">I accept all Terms & Conditions*</label>
           </div>
