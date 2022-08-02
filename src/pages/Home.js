@@ -53,14 +53,18 @@ export const Home = () => {
             )}
             {!filterState.isFiltering && allNotesList.length > 0 && (
               <div className="fw-bold mg-y-sm">
-                PINNED ({pinnedNotesList.length})
-                {pinnedNotesList.map((note) => (
-                  <NotesCard
-                    key={note._id}
-                    noteDetails={note}
-                    list={pinnedNotesList}
-                  />
-                ))}
+                {pinnedNotesList.length > 0 && (
+                  <div>
+                    PINNED ({pinnedNotesList.length})
+                    {pinnedNotesList.map((note) => (
+                      <NotesCard
+                        key={note._id}
+                        noteDetails={note}
+                        list={pinnedNotesList}
+                      />
+                    ))}
+                  </div>
+                )}
                 <div className="fw-bold mg-y-sm">
                   UNPINNED ({othersNotesList.length})
                 </div>
