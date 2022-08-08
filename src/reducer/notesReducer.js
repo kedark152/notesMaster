@@ -104,6 +104,15 @@ export const notesReducer = (state, { type, payload }) => {
         ...state,
         notesList: changeNoteColor(state, payload),
       };
+    case "UPDATE-STATE-ON-LOGIN":
+      return {
+        ...state,
+        notesList: payload.notes,
+        trashList: payload.trash,
+        archivesList: payload.archive,
+      };
+    case "CLEAR-NOTES-STATE":
+      return notesInitialState;
   }
 };
 
