@@ -35,7 +35,8 @@ input[type="checkbox"] {
   border: 2px solid var(--indigo-color);
 }
 
-.signup-card .btn {
+.signup-card .btn-signin,
+.signup-card .btn-create-account {
   padding: 1rem;
   border: none;
   justify-content: center;
@@ -52,7 +53,12 @@ input[type="checkbox"] {
   top: 1.75rem;
   right: 5px;
 }
-
+.btn-fill-dummy-data {
+  margin: 0;
+  margin-left: auto;
+  width: 9.5rem;
+  background-color: var(--indigo-color);
+}
 @media only screen and (max-width: 800px) {
   .signup-card {
     width: 95vw;
