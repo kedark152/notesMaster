@@ -6,17 +6,20 @@ import { MobileMenu } from "./MobileMenu";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { toast } from "react-toastify";
+import { useNotes } from "../context/notes-context";
 export const Navbar = ({ searchQuery, setSearchQuery }) => {
   const { dispatchFilter } = useFilter();
   const location = useLocation();
   const [mobileMenuStatus, setMobileMenuStatus] = useState(false);
   const { auth, setAuth } = useAuth();
+  const { dispatchNotes } = useNotes();
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
     setAuth({ ...auth, token: "", isLoggedIn: false });
+    dispatchNotes({ type: "CLEAR-NOTES-STATE" });
     toast.success("Logout Success");
     navigate("/");
   };
