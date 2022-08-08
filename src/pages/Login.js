@@ -6,10 +6,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/auth-context";
 import { useState, useRef } from "react";
+import { useNotes } from "../context/notes-context";
 import axios from "axios";
 
 export const Login = () => {
   const { auth, setAuth } = useAuth();
+  const { dispatchNotes } = useNotes();
   const [passwordType, setPasswordType] = useState("password");
   const [testData, setTestData] = useState({ email: "", password: "" });
   const editLoginForm = useRef(null);
@@ -36,6 +38,18 @@ export const Login = () => {
         ...auth,
         token: response.data.encodedToken,
         isLoggedIn: true,
+      });
+
+      const prevNotesData = response.data.foundUser.notes;
+      const prevArchiveData = response.data.foundUser.archives;
+      const prevTrashData = response.data.foundUser.trash;
+      dispatchNotes({
+        type: "UPDATE-STATE-ON-LOGIN",
+        payload: {
+          notes: prevNotesData,
+          trash: prevTrashData,
+          archive: prevArchiveData,
+        },
       });
 
       setTestData({ email: "", password: "" });
